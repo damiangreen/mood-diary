@@ -9,24 +9,6 @@ const mapDispatchToProps = {
   //addDailyMood: (c) => addDailyMood(c)
 }
 
-/*
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addDailyMood: () => {
-      dispatch(addDailyMood()) // how to get value here
-    }
-  }
-}
+const mapStateToProps = (state) => ({ days: state.diary });
 
-*/
-
-const getItems = state =>{
-  console.log('getitems');
-  console.log(state.diary);
-  return state;
-}
-
-const mapStateToProps = (state) => (getItems(state)
-)
-
-export default connect(mapStateToProps, mapDispatchToProps)(Calendar)
+export default connect(mapStateToProps, null)(Calendar)

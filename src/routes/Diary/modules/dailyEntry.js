@@ -6,7 +6,7 @@ export const ADD_DAILY_MOOD = 'ADD_DAILY_MOOD'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function addDailyMood(value = { mood: '', message: '' }) {
+export function addDailyMood(value) {
   return {
     type: ADD_DAILY_MOOD,
     payload: value
@@ -21,17 +21,16 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [ADD_DAILY_MOOD]: (state, action) =>
-    {
-      console.log(state.concat(action.payload));
+  [ADD_DAILY_MOOD]: (state, action) => {
+    console.log(state.concat(action.payload));
     return state.concat(action.payload) // TODO: push to array ({...state, action.payload})
-    }
+  }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = [{ mood: 'happy', message: 'Im ok today' }]
+const initialState = []
 
 export default function dailyEntryReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

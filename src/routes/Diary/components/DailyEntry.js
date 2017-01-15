@@ -1,9 +1,4 @@
 import React, {PropTypes} from 'react'
-import HappyImage from '../assets/moods/happy.jpg'
-import GoodImage from '../assets/moods/good.jpg'
-import SadImage from '../assets/moods/sad.jpg'
-import OkImage from '../assets/moods/ok.jpg'
-import TerribleImage from '../assets/moods/terrible.jpg'
 
 //todo why do i need to import assets instead of using their urls?
 //todo propTypes
@@ -11,40 +6,58 @@ class DailyEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: '',mood:''
+      message: '',
+      mood: ''
     }
     this.handleMessageChange = this.handleMessageChange.bind(this);
     this.moodClicked = this.moodClicked.bind(this);
     this.sendClicked = this.sendClicked.bind(this);
   }
 
-  moodClicked(event) {
-    this.setState({mood: event.target.alt})
+  moodClicked(mood) {
+    console.log(mood);
+    this.setState({mood: mood})
   }
 
   handleMessageChange(event) {
     this.setState({message: event.target.value})
   }
 
-  sendClicked(){
-    console.log(this.state);
-    this.props.addDailyMood(this.state); // should i pass the state??
+  sendClicked() {
+    this.props.addDailyMood({
+      ...this.state,
+      id: new Date().getTime()
+    }); // should i pass the state??
+    this.setState({mood: '', message: ''})
   }
 
   render() {
+    const emoticonClassName = 'emoticon'
     return (
       <div className='daily-entry'>
         <span>What is your mood today?</span>
-        <img src={HappyImage} className='emoticon' alt='great' onClick={this.moodClicked}/>
-        <img src={GoodImage} className='emoticon' alt='good' onClick={this.moodClicked}/>
-        <img src={OkImage} className='emoticon' alt='ok' onClick={this.moodClicked}/>
-        <img src={SadImage} className='emoticon' alt='bad' onClick={this.moodClicked}/>
-        <img src={TerribleImage} className='emoticon' alt='terrible' onClick={this.moodClicked}/>
-        <textarea value={this.state.message} onChange={this.handleMessageChange}/>
-        <button className='btn btn-default' onClick={this.sendClicked}>Go</button>
+        <Emoticon value='happy' onClicked={this.moodClicked} mood={this.state.mood}></Emoticon>
+        <Emoticon value='good' onClicked={this.moodClicked} mood={this.state.mood}></Emoticon>
+        <Emoticon value='ok' onClicked={this.moodClicked} mood={this.state.mood}></Emoticon>
+        <Emoticon value='sad' onClicked={this.moodClicked} mood={this.state.mood}></Emoticon>
+        <Emoticon value='terrible' onClicked={this.moodClicked} mood={this.state.mood}></Emoticon>
+        <div className="btn-group">
+          <textarea className='form-control' value={this.state.message} onChange={this.handleMessageChange}/>
+          <button className='btn btn-default' disabled={!this.state.mood} onClick={this.sendClicked}>Go</button>
+        </div>
       </div>
     )
   }
 }
 
 export default DailyEntry
+
+  const Emoticon = (props) =>{
+
+    const className =`emoticon ${ (props.mood === props.value
+      ? 'disabled'
+      : '')}`
+    return (<img src={require(`../assets/moods/${props.value}.jpg`)} className={className} alt={props.value} onClick={() => props.onClicked(props.value)}/>)
+}
+
+//export default Emoticon;

@@ -1,22 +1,28 @@
-
 .emoticon {
   display: inline-block;
   width: 71px;
   height: 71px;
   margin: 1.5rem auto;
   cursor: pointer;
+
+  &.disabled {
+    opacity: 0.5;
+  }
 }
-.calendar{
-border:solid 1px blue;
+
+.calendar {
+  border: solid 1px blue;
+  > div {
+    display: inline-block;
+    width: 71px;
+    height: 71px;
+    margin: 1.5rem auto;
+  }
+
 }
-.calendar > div {
-  display: inline-block;
-  width: 71px;
-  height: 71px;
-  margin: 1.5rem auto;
-}
+
 .daily-entry {
   textarea {
-    width:567px;
+    width: 567px;
   }
 }
