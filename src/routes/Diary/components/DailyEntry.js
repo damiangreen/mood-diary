@@ -5,24 +5,30 @@ import SadImage from '../assets/moods/sad.jpg'
 import OkImage from '../assets/moods/ok.jpg'
 import TerribleImage from '../assets/moods/terrible.jpg'
 
-//todo how can i make this dynamic?
+//todo why do i need to import assets instead of using their urls?
+//todo propTypes
 class DailyEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: '',
+      message: '',mood:''
     }
     this.handleMessageChange = this.handleMessageChange.bind(this);
     this.moodClicked = this.moodClicked.bind(this);
+    this.sendClicked = this.sendClicked.bind(this);
   }
 
   moodClicked(event) {
-    //console.log(event.target.alt);
     this.setState({mood: event.target.alt})
   }
 
   handleMessageChange(event) {
     this.setState({message: event.target.value})
+  }
+
+  sendClicked(){
+    console.log(this.state);
+    this.props.addDailyMood(this.state); // should i pass the state??
   }
 
   render() {
@@ -35,7 +41,7 @@ class DailyEntry extends React.Component {
         <img src={SadImage} className='emoticon' alt='bad' onClick={this.moodClicked}/>
         <img src={TerribleImage} className='emoticon' alt='terrible' onClick={this.moodClicked}/>
         <textarea value={this.state.message} onChange={this.handleMessageChange}/>
-        <button className='btn btn-default' onClick={this.props.setDailyMood}>Go</button>
+        <button className='btn btn-default' onClick={this.sendClicked}>Go</button>
       </div>
     )
   }
