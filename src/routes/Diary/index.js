@@ -15,8 +15,6 @@ path : 'diary',
 
       /*  Add the reducer to the store on key 'diary'  */
       injectReducer(store, { key: 'diary', reducer })
-      //const CalendarContainer = require('./containers/CalendarContainer').default
-    //  const reducer = require('./modules/dailyEntry').default
       /*  Return getComponent   */
       cb(null, DiaryContainer)
 

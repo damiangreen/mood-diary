@@ -1,3 +1,13 @@
+$primary-color: #ffe2e2;
+$secondary-color: #bad9ff;
+$dark: #7f1729;
+$calming-blue: #d0e1f6;
+$text-color: black;
+
+body {
+  background-color: $calming-blue; // #ff8096;
+}
+
 .emoticon {
   display: inline-block;
   width: 71px;
@@ -11,17 +21,60 @@
 }
 
 .calendar {
-  border: solid 1px blue;
-  > div {
-    display: inline-block;
-    width: 71px;
-    height: 71px;
-    margin: 1.5rem auto;
-  }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  border: solid 2px white;
+  min-height: 20rem;
+  background-color: $primary-color;
 
+  > .calendar-entry {
+    padding: 1em;
+    display: inline-block;
+    border: solid 2px $secondary-color;
+    margin: 1.5rem auto;
+    width: 20rem;
+    align-content: flex-start;
+
+    > .date {
+      color: $dark;
+    }
+  }
 }
 
 .daily-entry {
+  span {
+    color: $text-color;
+  }
+  border: solid 1px white;
+  margin-top: 2rem;
+  padding: 2rem;
+
+  .btn-mood-value {
+    margin: 2px;
+
+    &.btn-mood-value-selected {
+      background-color: $calming-blue;
+    }
+  }
+
+  button {
+    background-color: white;
+    text-transform: uppercase;
+    padding: 2rem;
+    color: $dark;
+
+    &:hover {
+      background-color: $secondary-color;
+      color: white;
+    }
+  }
+
+  .btn-add-mood {
+    margin-top: 2rem;
+  }
+
   textarea {
     width: 567px;
   }

@@ -21,10 +21,7 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [ADD_DAILY_MOOD]: (state, action) => {
-    console.log(state.concat(action.payload));
-    return state.concat(action.payload) // TODO: push to array ({...state, action.payload})
-  }
+  [ADD_DAILY_MOOD]: (state, action) => ([...state, action.payload])
 }
 
 // ------------------------------------
@@ -32,7 +29,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = []
 
-export default function dailyEntryReducer(state = initialState, action) {
+export default function diaryReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }

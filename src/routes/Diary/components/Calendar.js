@@ -1,23 +1,28 @@
 import React, {PropTypes} from 'react'
-import HappyImage from '../assets/moods/happy.jpg'
-import GoodImage from '../assets/moods/good.jpg'
-import SadImage from '../assets/moods/sad.jpg'
-import OkImage from '../assets/moods/ok.jpg'
-import TerribleImage from '../assets/moods/terrible.jpg'
+import {FormattedDate, IntlProvider} from 'react-intl';
+const Calendar = (props) => {
 
-class Calendar extends React.Component {
-  render() {
-    return (
-      <div className="calendar">
-        <h3>Calendar</h3>
-        {this.props.days.map(day => <div key={day.id}>
-          <img src={require(`../assets/moods/${day.mood}.jpg`)} className='emoticon' alt='great'/>
-          <span>{day.message}</span>
-        </div>)}
-
+  const items = props.days.length === 0
+    ? <div className='calendar-entry'><span>No items</span></div>
+    : props.days.map(day => <div key={day.id} className='calendar-entry'>
+      <div className='date'>
+        <FormattedDate value={new Date(day.id)}></FormattedDate>
       </div>
-    )
-  }
+      <img src={require(`../assets/moods/${day.mood}.jpg`)} className='emoticon' alt='{day.mood}'/>
+      <div>
+        <span>{day.message}</span>
+      </div>
+    </div>)
+
+  return (
+    <div>
+      <IntlProvider locale="en-gb">
+        <div className="calendar">
+          {items}
+        </div>
+      </IntlProvider>
+    </div>
+  )
 }
 
 export default Calendar;
